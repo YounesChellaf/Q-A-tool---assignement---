@@ -1,0 +1,10 @@
+.tool-bar{
+    display: flex;
+    justify-content: space-between;
+}
+
+.app-bar {
+    margin-bottom: 10px;
+    background-color: #1c6cac !important;
+    color: #fff !important;
+}

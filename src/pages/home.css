@@ -1,0 +1,8 @@
+.main {
+    margin-top: 7%;
+}
+.alert-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

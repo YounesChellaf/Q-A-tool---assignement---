@@ -1,0 +1,15 @@
+.questionContainer{
+    background-color: #f1f4f9 !important;
+    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1) !important;
+    padding: 1%;
+}
+
+.item-actions{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.item-content{
+    display: flex;
+    justify-content: space-between;
+}
