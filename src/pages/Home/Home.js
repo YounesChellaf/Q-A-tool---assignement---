@@ -1,41 +1,38 @@
 import React from 'react'
-import {Grid,Paper,Avatar,Typography,Box,Button} from '@material-ui/core'
+import {Grid,Box,Button} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete';
 import SortByAlphaIcon from '@material-ui/icons/SortByAlpha';
 import Alert from '@material-ui/lab/Alert';
 import {connect} from 'react-redux'
-import {addQuestion,deleteAllQuestions} from '../redux/actions/questionAction'
-import {QuestionItem, Tooltip,QandAForm} from "../components";
+import {addQuestion,deleteAllQuestions} from '../../redux/actions/questionAction'
+import {QuestionItem, Tooltip,QandAForm} from "../../components/index";
 import './home.css'
 
 
 
 class Home extends React.Component{
 
+    constructor (props) {
+        super(props)
+        this.state={
+            question: '',
+            answer: '',
+            delaySubmission: false,
+            qAndA : this.props.qAndA
+        };
+    }
 
 
-
-    state={
-        question: '',
-        answer: '',
-        delaySubmission: false,
-        data : []
-    };
-    //
-    // componentDidMount() {
-    //     this.setState({
-    //         data: this.props.qAndA
-    //     })
-    // }
-
-    // showAnswer = (question) => {
-    //
-    //     var data = {...this.state.data};
-    //     data.isAnswerVisible = true;
-    //     this.setState({
-    //         data: data
-    //     })
-    // };
+    // Update the state whenever the props changed //
+    // I used this approach to make the sort on the front end Side Else I would keep working with props inside Component
+    // And trigger the sort method using Redux but the store state will be sorted
+    componentWillReceiveProps(nextProps) {
+        if( nextProps.qAndA !== this.props.qAndA ){
+            this.setState({
+                qAndA : nextProps.qAndA
+            });
+        }
+    }
 
 
     // A function to delete all the questions one time
@@ -45,18 +42,18 @@ class Home extends React.Component{
 
     // A function to sort the questions Alphabitiquely
     sortQuestions = () => {
-        var data = this.state.data.sort(function(a, b) {
+        const sortedqAndA = this.state.qAndA.sort(function(a, b) {
             return a['question'].localeCompare(b['question']);
         });
+
         this.setState({
-            data: data
+            qAndA: sortedqAndA
         })
     }
 
 
 
     render(){
-
         return(
 
             <main className="container main">
@@ -71,18 +68,17 @@ class Home extends React.Component{
                             <h3 className="row">Created questions</h3><br/>
                         </Tooltip>
                     </Grid>
-                    {this.props.qAndA.length > 0 ?
-                        this.props.qAndA.map( item =>
-                            <Grid item key={item.id} lg={12}>
-                                <QuestionItem key={item.id} item={item}/>
-                            </Grid>
+                    {
+                        this.state.qAndA.length ?
+                            this.state.qAndA.map( item =>
+                                <Grid item key={item.id}  xs={12}>
+                                    <QuestionItem key={item.id} item={item}/>
+                                </Grid>
                             )
-                        :
-                        <Grid className="alert-container">
+                            :
                             <Box m={3}>
-                                <Alert icon={false} severity="error">No question available :(</Alert>
+                                    <Alert icon={false} severity="error">No question available :(</Alert>
                             </Box>
-                        </Grid>
                     }
                     <Grid container direction="row"  justify="center"
                           alignContent="flex-start">

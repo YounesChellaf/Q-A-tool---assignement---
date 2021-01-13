@@ -3,7 +3,6 @@ import {Card,Box,Typography,CardContent,TextField,FormControl,IconButton,Button,
 import {DeleteOutline,EditOutlined} from '@material-ui/icons'
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@material-ui/icons/VisibilityOffOutlined';
-
 import {connect} from 'react-redux'
 import {deleteQuestion,editQuestion} from '../../redux/actions/questionAction'
 import './QuestionItem.css'
@@ -17,6 +16,7 @@ class QuestionItem extends React.Component{
     }
 
 
+    // Global onChange method for different inputs
     handleChange = (e) => {
         const currentQandA = {...this.state.QandA};
         currentQandA[e.target.name] = e.target.value;
@@ -25,17 +25,19 @@ class QuestionItem extends React.Component{
         });
     }
 
+    // Swip the Q/A card down to show the hidden answer by default
     showAnswer = () => {
         this.setState({
             isAnswerVisible: ! this.state.isAnswerVisible
         })
     }
 
-
+    // Trigger a Redux action to DELETE_QUESTION
     deleteQandA = () => {
         this.props.deleteQuestion(this.props.item)
     };
 
+    // Show the editable fields in the same Q/A card
     showEditableFields = () => {
         this.setState({
             isEditable : ! this.state.isEditable
@@ -106,7 +108,7 @@ class QuestionItem extends React.Component{
                             </Grid>
 
                             :
-                            <div className="item-content">
+                            <div className="questions-content">
                                 <Grid
                                     container
                                     direction="row"
@@ -125,15 +127,15 @@ class QuestionItem extends React.Component{
                                         >
                                             {this.state.isAnswerVisible &&
                                             <Box m={1}>
-                                                <Typography variant="body">
+                                                <p>
                                                     {this.props.item.answer}
-                                                </Typography>
+                                                </p>
                                             </Box>
                                             }
                                         </Grid>
                                     </Grid>
                                     <Grid item xs={4} lg={3}>
-                                        <div className="item-actions">
+                                        <div className="question-actions">
                                             <IconButton onClick={this.showAnswer}>
                                                 {this.state.isAnswerVisible
                                                     ? <VisibilityOffOutlinedIcon/>

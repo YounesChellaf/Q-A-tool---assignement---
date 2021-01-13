@@ -1,5 +1,5 @@
-import Home from "./pages/Home";
-import Header from "./components/Header/Header";
+import Home from "./pages/Home/Home";
+import {Header} from "./components";
 import './App.css'
 
 

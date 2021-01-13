@@ -1,9 +1,5 @@
 import {ADD_QUESTION,DELETE_ALL_QUESTIONS,DELETE_QUESTION,EDIT_QUESTION} from './index'
-const getQuestions = () => {
-    return {
-        type : 'GET_QUESTIONS'
-    }
-}
+
 const addQuestion = (question) => {
     return {
         type: ADD_QUESTION,

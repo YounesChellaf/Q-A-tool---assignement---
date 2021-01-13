@@ -3,6 +3,7 @@ import {Grid,TextField,FormControl,Box,Button,FormControlLabel,Checkbox} from '@
 import SendIcon from '@material-ui/icons/Send';
 import AccessAlarmsIcon from '@material-ui/icons/AccessAlarms';
 import {addQuestion} from "../../redux/actions/questionAction";
+import Alert from '@material-ui/lab/Alert';
 import Tooltip from '../Tooltip/Tooltip'
 import {connect} from "react-redux";
 import './QandA.css'
@@ -14,6 +15,7 @@ class QandAForm extends React.Component{
         question: '',
         answer: '',
         delaySubmission: false,
+        emptyFields: false
     }
 
     handleChanges = (e) => {
@@ -25,29 +27,30 @@ class QandAForm extends React.Component{
 
     // A function to add QA
     addQuestionComponent = () => {
-        const QA = {
-            id: this.props.qAndA.length +1,
-            question : this.state.question,
-            answer : this.state.answer,
+        if ( this.state.question && this.state.answer )  {
+            const QA = {
+                id: this.props.qAndA.length + 1,
+                question : this.state.question,
+                answer : this.state.answer,
+            }
+            this.state.delaySubmission
+                ?
+                setTimeout(()=>{
+                    this.props.addQuestion(QA)
+                },5000)
+                :
+                this.props.addQuestion(QA)
         }
+        else this.setState({ emptyFields :true})
 
-        this.props.addQuestion(QA)
 
-        // var delay= 0;
-        //
-        // this.state.delaySubmission ?  delay = 5000 : delay=0;
-        //
-        // setTimeout(()=>{
-        //     this.setState({
-        //         data: [...this.state.data,QA]
-        //     })
-        // },delay)
     }
 
     render(){
         return(
             <Grid container justify="center" spacing={1}>
                 <Grid
+                    className="add-question-title"
                     container
                     direction="row"
                     justify="center"
@@ -57,7 +60,12 @@ class QandAForm extends React.Component{
                         <h3 className="row">Create a new questions</h3><br/>
                     </Tooltip>
                 </Grid>
-                <Grid  className="add-question-container" item xs={12} sm={8} md={6} lg={6}>
+                <Grid  className="add-question-container" item xs={12} lg={8}>
+                    {   this.state.emptyFields &&
+                        <Box m={3}>
+                            <Alert severity="error">The question and answer fields are required !</Alert>
+                        </Box>
+                    }
                         <FormControl fullWidth>
                             <TextField id="outlined-basic"
                                        label="Question"
@@ -91,7 +99,7 @@ class QandAForm extends React.Component{
                                 name="delaySubmission"
 
                             />}
-                        label="Would you like add a dalay for the question to be posted"
+                        label="Check and wait 5 seconds to add your question"
                         labelPlacement="end"
                     />
                     <Box>
@@ -111,6 +119,7 @@ class QandAForm extends React.Component{
 
 
 const mapStateToProps = state => {
+    console.log(state.questionReducer.qAndA)
     return {
         qAndA: state.questionReducer.qAndA
     }

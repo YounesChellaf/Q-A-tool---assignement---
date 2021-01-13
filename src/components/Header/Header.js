@@ -1,6 +1,5 @@
 import React from 'react'
 import {AppBar, Toolbar} from '@material-ui/core'
-
 import './Header.css'
 
 class Header extends React.Component{
@@ -11,7 +10,6 @@ class Header extends React.Component{
                 <Toolbar className='tool-bar'>
                     <h3>Studocu Awesome QA</h3>
                 </Toolbar>
-
             </AppBar>
         )
     }
