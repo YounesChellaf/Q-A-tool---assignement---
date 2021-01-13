@@ -3,7 +3,7 @@
     display: inline-block;
 }
 
-/* Tooltip text */
+/* Tooltip text container */
 .qa-tooltip .qa-tooltip-text {
     width: 250px;
     color: white;
@@ -17,7 +17,7 @@
     transition: opacity 0.3s;
 }
 
-/* Tooltip arrow */
+/* Tooltip arrow design*/
 .qa-tooltip .qa-tooltip-text::after {
     position: absolute;
     bottom: 100%;

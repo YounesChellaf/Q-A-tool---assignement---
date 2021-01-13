@@ -25,14 +25,17 @@ class QandAForm extends React.Component{
         })
     }
 
-    // A function to add QA
+    // A function to add QA by dispatching Redux ADD_QUESTION action
     addQuestionComponent = () => {
+
         if ( this.state.question && this.state.answer )  {
+            // object construction to pass to the action as a payload later (in Redux)
             const QA = {
                 id: this.props.qAndA.length + 1,
                 question : this.state.question,
                 answer : this.state.answer,
             }
+            // Check whether the user choosed to add a time delay
             this.state.delaySubmission
                 ?
                 setTimeout(()=>{
@@ -41,6 +44,7 @@ class QandAForm extends React.Component{
                 :
                 this.props.addQuestion(QA)
         }
+        // Display an error alert if the fields are empty
         else this.setState({ emptyFields :true})
 
 
@@ -117,9 +121,7 @@ class QandAForm extends React.Component{
     }
 }
 
-
 const mapStateToProps = state => {
-    console.log(state.questionReducer.qAndA)
     return {
         qAndA: state.questionReducer.qAndA
     }

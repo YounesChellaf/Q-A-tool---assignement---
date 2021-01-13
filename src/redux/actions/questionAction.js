@@ -1,4 +1,4 @@
-import {ADD_QUESTION,DELETE_ALL_QUESTIONS,DELETE_QUESTION,EDIT_QUESTION} from './index'
+import {ADD_QUESTION,DELETE_ALL_QUESTIONS,DELETE_QUESTION,EDIT_QUESTION} from './type'
 
 const addQuestion = (question) => {
     return {

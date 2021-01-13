@@ -1,10 +1,10 @@
-import {ADD_QUESTION,DELETE_ALL_QUESTIONS,DELETE_QUESTION,EDIT_QUESTION} from '../actions'
+import {ADD_QUESTION,DELETE_ALL_QUESTIONS,DELETE_QUESTION,EDIT_QUESTION} from '../actions/type'
 const initialState = {
     qAndA : [
         {
             id: 1,
             question: 'Will I have a black Studocu t-shirt ?',
-            answer: 'Sorry for that, we have just white color in the stock',
+            answer: 'Lets see you code pieces and we will decide',
         },
     ]
 };

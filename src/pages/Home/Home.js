@@ -1,11 +1,11 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Grid,Box,Button} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete';
 import SortByAlphaIcon from '@material-ui/icons/SortByAlpha';
 import Alert from '@material-ui/lab/Alert';
-import {connect} from 'react-redux'
+import {QuestionItem, Tooltip,QandAForm} from "../../components";
 import {addQuestion,deleteAllQuestions} from '../../redux/actions/questionAction'
-import {QuestionItem, Tooltip,QandAForm} from "../../components/index";
 import './home.css'
 
 
@@ -45,7 +45,7 @@ class Home extends React.Component{
         const sortedqAndA = this.state.qAndA.sort(function(a, b) {
             return a['question'].localeCompare(b['question']);
         });
-
+        // Sort the question on a front side
         this.setState({
             qAndA: sortedqAndA
         })
@@ -55,7 +55,6 @@ class Home extends React.Component{
 
     render(){
         return(
-
             <main className="container main">
                 <Grid container justify="center" spacing={4}>
                     <Grid
